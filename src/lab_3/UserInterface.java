@@ -27,11 +27,13 @@ public class UserInterface {
         String input;
         boolean quit = false;
         while (!quit) {
-            System.out.println("Add book(1), remove book(2), search for books(3), sort Books(4), print all books(5), save and quit(6)");
+            //System.out.println("Add book(1), remove book(2), search for books(3), sort Books(4), print all books(5), save and quit(6)");
+            printMenu();
             input = scan.nextLine();
             switch (input) {
                 case "1": //Add a book
-                    addBook();
+                    testAddBook();
+                    //addBook();
                     break;
                 case "2": //remove
                     removeBook();
@@ -49,10 +51,59 @@ public class UserInterface {
                     library.saveToFile();
                     quit = true;
                     break;
+                case "7"://quit without saving
+                    quit=true;
+                    break;
                 default:
                     break;
             }
         }
+    }
+
+    public void testAddBook(){
+        String title,isbn;
+        ArrayList<String> author = new ArrayList<>();
+        int edition,price;
+        title="rakkay";
+        author.add("kalle");
+        isbn="12-34-567890";
+        edition=1;
+        price=100;
+        library.addBook(title, author, edition, isbn, price);
+        author.clear();
+        title="Rummanof";
+        author.add("Antono");
+        author.add("Alexi");
+        isbn="12-34-567890";
+        edition=3;
+        price=250;
+        library.addBook(title, author, edition, isbn, price);
+        author.clear();
+        title="Libre";
+        author.add("linn");
+        author.add("fredrik");
+        isbn="12-34-567890";
+        edition=2;
+        price=200;
+        library.addBook(title, author, edition, isbn, price);
+        author.clear();
+        title="mammy";
+        author.add("rinoy");
+        author.add("anton");
+        author.add("kalle");
+        isbn="12-34-567890";
+        edition=5;
+        price=300;
+        library.addBook(title, author, edition, isbn, price);
+        author.clear();
+        title="är namn";
+        author.add("örjan");
+        author.add("lukas");
+        isbn="12-34-567890";
+        edition=4;
+        price=400;
+        library.addBook(title, author, edition, isbn, price);
+        author.clear();
     }
 
     public void addBook() {
@@ -82,10 +133,11 @@ public class UserInterface {
             }
 
             System.out.print("Edition: ");
+            tmp=scan.nextLine();
             if (tmp.length()<1){
                 edition=Integer.parseInt("0");
             }else {
-                edition = Integer.parseInt(scan.nextLine());
+                edition = Integer.parseInt(tmp);
             }
 
             System.out.print("ISBN: ");
@@ -95,10 +147,11 @@ public class UserInterface {
             }
 
             System.out.print("Price: ");
+            tmp=scan.nextLine();
             if (tmp.length()<1){
                 price = Double.parseDouble("0");
             }else {
-                price = Double.parseDouble(scan.nextLine());
+                price = Double.parseDouble(tmp);
             }
 
             library.addBook(title, author, edition, isbn, price);
@@ -169,7 +222,7 @@ public class UserInterface {
     }
 
     public void searchBook() {
-        ArrayList<Book> bookList = getBookBy();
+        /*ArrayList<Book> bookList = getBookBy();
         if (bookList.size() < 1) {
             System.out.println("no books was found");
             return;
@@ -178,9 +231,9 @@ public class UserInterface {
         for (Book book : bookList) {
             books += book.toString();
         }
-        System.out.println(books);
+        System.out.println(books);*/
 
-        /*String ans;
+        String ans;
         ArrayList tmp,result=new ArrayList();
         System.out.print("Enter search term: ");
         ans = scan.nextLine();
@@ -204,14 +257,13 @@ public class UserInterface {
         }
         for (int i=0;i<result.size();i++){
             System.out.println(result.get(i));
-        }*/
+        }
 
     }
 
     public void printAllBooks() {
-        //System.out.println(library.toString());
         ArrayList<String> tmp = library.libraryToString();
-        for (int i = 0;i<tmp.size();i++){
+        for (int i =0; i<tmp.size();i++){
             System.out.println(tmp.get(i));
         }
     }
@@ -229,6 +281,18 @@ public class UserInterface {
                 library.sortByISBN();
                 break;
         }
+    }
+
+    private void printMenu(){
+        System.out.println("-----------Menu------------");
+        System.out.println("1: Add a new book");
+        System.out.println("2: Remove a book");
+        System.out.println("3: Search for a book");
+        System.out.println("4: Sort all books");
+        System.out.println("5: Print all available books");
+        System.out.println("6: Exit");
+        System.out.println("---------------------------");
+        System.out.print("Enter: ");
     }
 
     public static void main(String[] args) throws Exception {

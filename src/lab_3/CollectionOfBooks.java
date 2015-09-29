@@ -159,18 +159,19 @@ public class CollectionOfBooks {
         return books;
     }
     public ArrayList libraryToString(){
-        StringBuilder strBuilder = new StringBuilder();
-        ArrayList tmp = new ArrayList();
+        StringBuilder strBuilder;
+        ArrayList<String> tmp = new ArrayList();
         for (int i =0;i<library.size();i++) {
+            strBuilder = new StringBuilder();
             strBuilder.append("Title: " + library.get(i).getTitle() + " ");
-            strBuilder.append("Author:");
-            for (int j = 0; i < library.get(i).getNmbAuthors(); i++) {
+            strBuilder.append("Author(s):");
+            for (int j = 0; j < library.get(i).getNmbAuthors(); j++) {
                 strBuilder.append(" " + library.get(i).getAuthorName(j));
             }
             strBuilder.append(" ");
             strBuilder.append("ISBN: " + library.get(i).getISBN() + " ");
             strBuilder.append("Edition: " + library.get(i).getEdition() + " ");
-            strBuilder.append("Price: " + library.get(i).getPrice() + " ");
+            strBuilder.append("Price ($): " + library.get(i).getPrice() + " ");
             tmp.add(strBuilder.toString());
         }
         return tmp;
