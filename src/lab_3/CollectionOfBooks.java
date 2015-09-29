@@ -145,10 +145,9 @@ public class CollectionOfBooks {
             books.append("Title: " + book.getTitle() + " Author(s): ");
             for (int i = 0; i < book.getNoOfAuthors(); i++) {
                 books.append(book.getAuthors().get(i).getName());
-                if(book.getNoOfAuthors()>1 && i < book.getNoOfAuthors()-1) {
+                if (book.getNoOfAuthors() > 1 && i < book.getNoOfAuthors() - 1) {
                     books.append(" & ");
-                }
-                else {
+                } else {
                     books.append(" , ");
                 }
             }
@@ -158,10 +157,11 @@ public class CollectionOfBooks {
         }
         return books.toString();
     }
-    public ArrayList libraryToString(){
+
+    public ArrayList libraryToString() {
         StringBuilder strBuilder;
         ArrayList<String> tmp = new ArrayList();
-        for (int i =0;i<library.size();i++) {
+        for (int i = 0; i < library.size(); i++) {
             strBuilder = new StringBuilder();
             strBuilder.append("Title: " + library.get(i).getTitle() + " ");
             strBuilder.append("Author(s):");
