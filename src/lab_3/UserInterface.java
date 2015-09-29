@@ -90,7 +90,7 @@ public class UserInterface {
         }
     }
 
-    public ArrayList<Book> getBookBy() {
+    private ArrayList<Book> getBookBy() {
         String input;
         System.out.println("by title(1), by author(2), by ISBN(3)");
         input = scan.nextLine();
@@ -112,7 +112,7 @@ public class UserInterface {
         }
     }
 
-    public void removeBook() {                                                                         
+    public void removeBook() {
         ArrayList<Book> theBook = getBookBy();
         String input;
         System.out.println(theBook.size());
