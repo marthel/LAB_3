@@ -15,7 +15,7 @@ import java.util.*;
  */
 public class Book implements Comparable<Book>, Serializable {
 
-    private String ISBN,title;
+    private String ISBN, title;
     private int edition;
     private double price;
     private ArrayList<Author> authors;
