@@ -112,7 +112,7 @@ public class UserInterface {
         }
     }
 
-    public void removeBook() {                                                                          //varför är allt kommenterat??!??!?!
+    public void removeBook() {                                                                         
         ArrayList<Book> theBook = getBookBy();
         String input;
         System.out.println(theBook.size());
