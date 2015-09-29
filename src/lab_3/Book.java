@@ -36,7 +36,7 @@ public class Book implements Comparable<Book>, Serializable {
         return authors;
     }
 
-    public int getNmbAuthors() {
+    public int getNoOfAuthors() {
         return authors.size();
     }
 
@@ -67,12 +67,12 @@ public class Book implements Comparable<Book>, Serializable {
 
     @Override
     public String toString() {
-        String books = new String();
-        books += "Title: " + title + " Authors: ";
+        String book = new String();
+        book += "Title: " + title + " Authors: ";
         for (int i = 0; i < authors.size(); i++) {
-            books += authors.get(i).getName() + ", ";
+            book += authors.get(i).getName() + ", ";
         }
-        books += "ISBN: " + ISBN + ", EDITION: " + edition + ", PRICE: $" + price + " \n";
-        return books;
+        book += "ISBN: " + ISBN + ", EDITION: " + edition + ", PRICE: $" + price + " \n";
+        return book;
     }
 }

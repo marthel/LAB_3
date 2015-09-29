@@ -45,16 +45,10 @@ public class CollectionOfBooks {
     public ArrayList<Book> getBooksByTitle(String title) {
         ArrayList<Book> tmp = new ArrayList<>();
         String bTitle;
-        if (title=="#"){
-            for (Book book : library) {
+        for (Book book : library) {
+            bTitle = book.getTitle();
+            if (bTitle.toLowerCase(Locale.getDefault()).contains(title.toLowerCase(Locale.getDefault()))) {
                 tmp.add(book);
-            }
-        }else {
-            for (Book book : library) {
-                bTitle = book.getTitle();
-                if (bTitle.toLowerCase(Locale.getDefault()).contains(title.toLowerCase(Locale.getDefault()))) {
-                    tmp.add(book);
-                }
             }
         }
         Collections.sort(tmp, new TitleComparator());
@@ -67,7 +61,7 @@ public class CollectionOfBooks {
         String bISBN;
         for (Book book : library) {
             bISBN = book.getISBN();
-            if (bISBN == ISBN) {
+            if (bISBN.equals(ISBN)) {
                 tmp.add(book);
             }
         }
@@ -122,7 +116,6 @@ public class CollectionOfBooks {
     public void readFromFile() throws Exception {
         ObjectInputStream ois = null;
         File f = null;
-        boolean bool = false;
         try {
             FileInputStream fin = new FileInputStream("library.ser");
             ois = new ObjectInputStream(fin);
@@ -130,12 +123,12 @@ public class CollectionOfBooks {
         } catch (ClassNotFoundException e) {
             System.out.println("class not found");
             throw e;
-        } catch (FileNotFoundException e){
+        } catch (FileNotFoundException e) {
             System.out.println("file not found");
             //throw e;
-        }catch (InvalidClassException e){
+        } catch (InvalidClassException e) {
             throw e;
-        }finally {
+        } finally {
             try {
                 if (ois != null) {
                     ois.close();
@@ -158,13 +151,14 @@ public class CollectionOfBooks {
 
         return books;
     }
-    public ArrayList libraryToString(){
+
+    public ArrayList libraryToString() {
         StringBuilder strBuilder = new StringBuilder();
         ArrayList tmp = new ArrayList();
-        for (int i =0;i<library.size();i++) {
+        for (int i = 0; i < library.size(); i++) {
             strBuilder.append("Title: " + library.get(i).getTitle() + " ");
             strBuilder.append("Author:");
-            for (int j = 0; i < library.get(i).getNmbAuthors(); i++) {
+            for (int j = 0; i < library.get(i).getNoOfAuthors(); i++) {
                 strBuilder.append(" " + library.get(i).getAuthorName(j));
             }
             strBuilder.append(" ");
