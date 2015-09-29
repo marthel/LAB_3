@@ -32,8 +32,7 @@ public class UserInterface {
             input = scan.nextLine();
             switch (input) {
                 case "1": //Add a book
-                    testAddBook();
-                    //addBook();
+                    addBook();
                     break;
                 case "2": //remove
                     removeBook();
