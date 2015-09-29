@@ -106,8 +106,8 @@ public class UserInterface {
     }
 
     public void addBook() {
-        String tmp, title, isbn;
-        ArrayList<String> author = new ArrayList<>();
+        String author, title, isbn;
+        ArrayList<String> authors = new ArrayList<>();
         int edition;
         double price;
         try {
@@ -118,12 +118,12 @@ public class UserInterface {
 
             while (true) {
                 System.out.print("Author: ");
-                if (scan.nextLine().length() > 0) {
-                    author.add(scan.nextLine());
+                author = scan.nextLine(); 
+                if (author.length() > 0) {
+                    authors.add(author);
                 } else {
                     break;
                 }
-
             }
 
             System.out.print("Edition: ");
