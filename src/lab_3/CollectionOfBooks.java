@@ -143,8 +143,14 @@ public class CollectionOfBooks {
         StringBuilder books = new StringBuilder();
         for (Book book : library) {
             books.append("Title: " + book.getTitle() + " Author(s): ");
-            for (int i = 0; i < book.getAuthors().size(); i++) {
-                books.append(book.getAuthors().get(i).getName() + ", ");
+            for (int i = 0; i < book.getNoOfAuthors(); i++) {
+                books.append(book.getAuthors().get(i).getName());
+                if(book.getNoOfAuthors()>1 && i < book.getNoOfAuthors()-1) {
+                    books.append(" & ");
+                }
+                else {
+                    books.append(" , ");
+                }
             }
             books.append("ISBN: " + book.getISBN() + ", ");
             books.append("EDITION: " + book.getEdition() + ", ");

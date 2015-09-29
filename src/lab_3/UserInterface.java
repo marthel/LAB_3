@@ -194,10 +194,11 @@ public class UserInterface {
         System.out.println(books);
     }
     public void printAllBooks() {
-        ArrayList<String> tmp = library.libraryToString();
+        System.out.println(library.toString());
+        /*ArrayList<String> tmp = library.libraryToString();
         for (int i = 0; i < tmp.size(); i++) {
             System.out.println(tmp.get(i));
-        }
+        }*/
     }
 
     public void sortBooks() {
