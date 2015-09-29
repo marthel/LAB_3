@@ -140,16 +140,17 @@ public class CollectionOfBooks {
 
     @Override
     public String toString() {
-        String books = new String();
+        StringBuilder books = new StringBuilder();
         for (Book book : library) {
-            books += "Title: " + book.getTitle() + " Author(s): ";
+            books.append("Title: " + book.getTitle() + " Author(s): ");
             for (int i = 0; i < book.getAuthors().size(); i++) {
-                books += book.getAuthors().get(i).getName() + ", ";
+                books.append(book.getAuthors().get(i).getName() + ", ");
             }
-            books += "ISBN: " + book.getISBN() + ", EDITION: " + book.getEdition() + ", PRICE: $" + book.getPrice() + " \n";
+            books.append("ISBN: " + book.getISBN() + ", ");
+            books.append("EDITION: " + book.getEdition() + ", ");
+            books.append("PRICE: $" + book.getPrice() + " \n");
         }
-
-        return books;
+        return books.toString();
     }
 
     public ArrayList libraryToString() {
