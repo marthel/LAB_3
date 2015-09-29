@@ -15,6 +15,6 @@ public class ISBNComparator implements Comparator<Book> {
 
     @Override
     public int compare(Book a, Book b) {
-        return a.getISBN() < b.getISBN() ? -1 : a.getISBN() == b.getISBN() ? 0 : 1;
+        return a.getISBN().compareToIgnoreCase(b.getISBN());
     }
 }

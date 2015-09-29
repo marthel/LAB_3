@@ -15,12 +15,12 @@ import java.util.*;
  */
 public class Book implements Comparable<Book>, Serializable {
 
-    private String title;
-    private int ISBN, edition;
+    private String ISBN,title;
+    private int edition;
     private double price;
     private ArrayList<Author> authors;
 
-    public Book(int ISBN, String title, int edition, double price) {
+    public Book(String ISBN, String title, int edition, double price) {
         this.ISBN = ISBN;
         this.title = title;
         this.edition = edition;
@@ -36,7 +36,7 @@ public class Book implements Comparable<Book>, Serializable {
         return authors;
     }
 
-    public int getNoOfAuthors() {
+    public int getNmbAuthors() {
         return authors.size();
     }
 
@@ -48,7 +48,7 @@ public class Book implements Comparable<Book>, Serializable {
         return title;
     }
 
-    public int getISBN() {
+    public String getISBN() {
         return ISBN;
     }
 

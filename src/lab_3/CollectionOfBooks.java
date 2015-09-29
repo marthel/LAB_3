@@ -15,18 +15,18 @@ import java.lang.*;
  */
 public class CollectionOfBooks {
 
-    private ArrayList<Book> theBooks;
+    private ArrayList<Book> library;
 
     public CollectionOfBooks() throws Exception {
-        theBooks = new ArrayList<>();
+        library = new ArrayList<>();
         readFromFile();
     }
 
     public void addBook(Book book) {
-        theBooks.add(book);
+        library.add(book);
     }
 
-    public void addBook(String title, ArrayList<String> authors, int edition, int ISBN, double price) {
+    public void addBook(String title, ArrayList<String> authors, int edition, String ISBN, double price) {
         Book book = new Book(ISBN, title, edition, price);
         for (String author : authors) {
             book.addAuthor(author);
@@ -35,20 +35,26 @@ public class CollectionOfBooks {
     }
 
     public void removeBook(Book book) {
-        theBooks.remove(book);
+        library.remove(book);
     }
 
     public int getNoOfBooks() {
-        return theBooks.size();
+        return library.size();
     }
 
     public ArrayList<Book> getBooksByTitle(String title) {
         ArrayList<Book> tmp = new ArrayList<>();
         String bTitle;
-        for (Book book : theBooks) {
-            bTitle = book.getTitle();
-            if (bTitle.toLowerCase().contains(title.toLowerCase())) {
+        if (title=="#"){
+            for (Book book : library) {
                 tmp.add(book);
+            }
+        }else {
+            for (Book book : library) {
+                bTitle = book.getTitle();
+                if (bTitle.toLowerCase(Locale.getDefault()).contains(title.toLowerCase(Locale.getDefault()))) {
+                    tmp.add(book);
+                }
             }
         }
         Collections.sort(tmp, new TitleComparator());
@@ -56,10 +62,10 @@ public class CollectionOfBooks {
 
     }
 
-    public ArrayList<Book> getBooksByISBN(int ISBN) {
+    public ArrayList<Book> getBooksByISBN(String ISBN) {
         ArrayList<Book> tmp = new ArrayList<>();
-        int bISBN;
-        for (Book book : theBooks) {
+        String bISBN;
+        for (Book book : library) {
             bISBN = book.getISBN();
             if (bISBN == ISBN) {
                 tmp.add(book);
@@ -72,10 +78,10 @@ public class CollectionOfBooks {
     public ArrayList<Book> getBooksByAuthor(String author) {
         ArrayList<Book> tmp = new ArrayList<>();
         String bAuthor;
-        for (Book book : theBooks) {
+        for (Book book : library) {
             for (int i = 0; i < book.getAuthors().size(); i++) {
                 bAuthor = book.getAuthors().get(i).getName();
-                if (bAuthor.toLowerCase().contains(author.toLowerCase()) && !tmp.contains(book)) {
+                if (bAuthor.toLowerCase(Locale.getDefault()).contains(author.toLowerCase(Locale.getDefault())) && !tmp.contains(book)) {
                     tmp.add(book);
                 }
             }
@@ -85,15 +91,15 @@ public class CollectionOfBooks {
     }
 
     public void sortByTitle() {
-        Collections.sort(theBooks, new TitleComparator());
+        Collections.sort(library, new TitleComparator());
     }
 
     public void sortByISBN() {
-        Collections.sort(theBooks, new ISBNComparator());
+        Collections.sort(library, new ISBNComparator());
     }
 
     public void sortByAuthor() {
-        Collections.sort(theBooks, new AuthorComparator());
+        Collections.sort(library, new AuthorComparator());
     }
 
     public ArrayList sortByPrice() {
@@ -105,7 +111,7 @@ public class CollectionOfBooks {
         try {
             FileOutputStream fout = new FileOutputStream("library.ser");
             oos = new ObjectOutputStream(fout);
-            oos.writeObject(theBooks);
+            oos.writeObject(library);
         } finally {
             if (oos != null) {
                 oos.close();
@@ -115,14 +121,21 @@ public class CollectionOfBooks {
 
     public void readFromFile() throws Exception {
         ObjectInputStream ois = null;
+        File f = null;
+        boolean bool = false;
         try {
             FileInputStream fin = new FileInputStream("library.ser");
             ois = new ObjectInputStream(fin);
-            theBooks = (ArrayList<Book>) ois.readObject();
+            library = (ArrayList<Book>) ois.readObject();
         } catch (ClassNotFoundException e) {
             System.out.println("class not found");
             throw e;
-        } finally {
+        } catch (FileNotFoundException e){
+            System.out.println("file not found");
+            //throw e;
+        }catch (InvalidClassException e){
+            throw e;
+        }finally {
             try {
                 if (ois != null) {
                     ois.close();
@@ -135,13 +148,31 @@ public class CollectionOfBooks {
     @Override
     public String toString() {
         String books = new String();
-        for (Book book : theBooks) {
+        for (Book book : library) {
             books += "Title: " + book.getTitle() + " Author(s): ";
             for (int i = 0; i < book.getAuthors().size(); i++) {
                 books += book.getAuthors().get(i).getName() + ", ";
             }
             books += "ISBN: " + book.getISBN() + ", EDITION: " + book.getEdition() + ", PRICE: $" + book.getPrice() + " \n";
         }
+
         return books;
+    }
+    public ArrayList libraryToString(){
+        StringBuilder strBuilder = new StringBuilder();
+        ArrayList tmp = new ArrayList();
+        for (int i =0;i<library.size();i++) {
+            strBuilder.append("Title: " + library.get(i).getTitle() + " ");
+            strBuilder.append("Author:");
+            for (int j = 0; i < library.get(i).getNmbAuthors(); i++) {
+                strBuilder.append(" " + library.get(i).getAuthorName(j));
+            }
+            strBuilder.append(" ");
+            strBuilder.append("ISBN: " + library.get(i).getISBN() + " ");
+            strBuilder.append("Edition: " + library.get(i).getEdition() + " ");
+            strBuilder.append("Price: " + library.get(i).getPrice() + " ");
+            tmp.add(strBuilder.toString());
+        }
+        return tmp;
     }
 }
