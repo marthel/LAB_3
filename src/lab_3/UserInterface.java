@@ -183,7 +183,7 @@ public class UserInterface {
     }
 
     public void searchBook() {
-        /*ArrayList<Book> bookList = getBookBy();
+        ArrayList<Book> bookList = getBookBy();
         if (bookList.size() < 1) {
             System.out.println("no books was found");
             return;
@@ -194,7 +194,6 @@ public class UserInterface {
         }
         System.out.println(books);
     }
-
     public void printAllBooks() {
         ArrayList<String> tmp = library.libraryToString();
         for (int i = 0; i < tmp.size(); i++) {

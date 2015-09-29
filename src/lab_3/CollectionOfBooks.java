@@ -159,7 +159,7 @@ public class CollectionOfBooks {
             strBuilder = new StringBuilder();
             strBuilder.append("Title: " + library.get(i).getTitle() + " ");
             strBuilder.append("Author(s):");
-            for (int j = 0; j < library.get(i).getNmbAuthors(); j++) {
+            for (int j = 0; j < library.get(i).getNoOfAuthors(); j++) {
                 strBuilder.append(" " + library.get(i).getAuthorName(j));
             }
             strBuilder.append(" ");
