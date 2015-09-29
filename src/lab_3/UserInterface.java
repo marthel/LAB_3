@@ -135,7 +135,7 @@ public class UserInterface {
             System.out.print("Price: ");
             price = Double.parseDouble(scan.nextLine());
 
-            library.addBook(title, author, edition, isbn, price);
+            library.addBook(title, authors, edition, isbn, price);
         } catch (Exception e) {
         }
     }
