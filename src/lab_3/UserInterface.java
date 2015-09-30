@@ -12,6 +12,7 @@ import java.util.*;
 /**
  *
  * @author Marthin
+ * @author rasmusjansson
  */
 public class UserInterface {
 
