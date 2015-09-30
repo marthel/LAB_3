@@ -10,22 +10,40 @@ import java.util.*;
 import java.lang.*;
 
 /**
- *
+ *Represents a library of books
+ * 
  * @author Marthin
+ * @author Rasmus
  */
 public class CollectionOfBooks {
-
+    /**
+     * The library of all books
+     */
     private ArrayList<Book> library;
-
+    /**
+     * Creates a library of books.
+     * the library is then filled with books from a file
+     */
     public CollectionOfBooks() throws Exception {
         library = new ArrayList<>();
         readFromFile();
     }
-
+    /**
+     * Adds a book to the library
+     * @param book this is a Book object
+     */
     public void addBook(Book book) {
         library.add(book);
     }
-
+    /**
+     * adds a book to the library.
+     * @param title This is the title of the book.
+     * @param authors This is a list of authors that wrote the book.
+     *                A book can have more than one author.
+     * @param edition This is the edition of the book.
+     * @param ISBN This is the ISBN of the book.
+     * @param price This is the price of the book.
+     */
     public void addBook(String title, ArrayList<String> authors, int edition, String ISBN, double price) {
         Book book = new Book(ISBN, title, edition, price);
         for (String author : authors) {
@@ -33,15 +51,27 @@ public class CollectionOfBooks {
         }
         addBook(book);
     }
-
+    /**
+     * Removes the specified book.
+     * @param book this is the book object that will be removed.
+     */
     public void removeBook(Book book) {
         library.remove(book);
     }
-
+    /**
+     * gets the number of books i the library.
+     * @return the library size.
+     */
     public int getNoOfBooks() {
         return library.size();
     }
-
+    /**
+     * Gets a list of books by the given title, will sort by title before it is returned
+     * @param title This is the title of the book(s) that will be returned.
+     *              The title does not need to be the whole title of the book,
+     *              the method will check if any title contains the given sequence.
+     * @return returns a list of books that contains the given title.
+     */
     public ArrayList<Book> getBooksByTitle(String title) {
         ArrayList<Book> tmp = new ArrayList<>();
         String bTitle;
@@ -55,7 +85,12 @@ public class CollectionOfBooks {
         return tmp;
 
     }
-
+    /**
+     * Gets a list of books by the given ISBN, will sort by ISBN before it is returned
+     * @param ISBN This is the ISBN of the book that will be returned.
+     *              The ISBN needs to matchs the ISBN of a book for it to be returned.
+     * @return returns a list of books that contains the given ISBN.
+     */
     public ArrayList<Book> getBooksByISBN(String ISBN) {
         ArrayList<Book> tmp = new ArrayList<>();
         String bISBN;
@@ -68,7 +103,13 @@ public class CollectionOfBooks {
         Collections.sort(tmp, new ISBNComparator());
         return tmp;
     }
-
+    /**
+     * Gets a list of books by the given author, will sort by number of authors before it is returned
+     * @param author This is the author of the book(s) that will be returned.
+     *              The author doesn't need to be the whole name of an authors
+     *              the method will check if any author contains the given sequence.
+     * @return returns a list of books that contains the given author.
+     */
     public ArrayList<Book> getBooksByAuthor(String author) {
         ArrayList<Book> tmp = new ArrayList<>();
         String bAuthor;
@@ -83,23 +124,34 @@ public class CollectionOfBooks {
         Collections.sort(tmp, new AuthorComparator());
         return tmp;
     }
-
+    /**
+     * Sorts the library by the book title
+     */
     public void sortByTitle() {
         Collections.sort(library, new TitleComparator());
     }
-
+    /**
+     * Sorts the library by the book ISBN
+     */
     public void sortByISBN() {
         Collections.sort(library, new ISBNComparator());
     }
-
+    /**
+     * Sorts by a books number of authors
+     */
     public void sortByAuthor() {
         Collections.sort(library, new AuthorComparator());
     }
-
+    /**
+     * Methed not done.
+     * @return returns null
+    */
     public ArrayList sortByPrice() {
         return null;
     }
-
+    /**
+     * Tries to save the current library to a file "library.ser"
+     */
     public void saveToFile() throws IOException {
         ObjectOutputStream oos = null;
         try {
@@ -112,7 +164,10 @@ public class CollectionOfBooks {
             }
         }
     }
-
+    /**
+     * Tries to read from "library.ser" file, if successfull will add the books to the library.
+     * @throws e throws ClassNotFoundException and InvalidClassException
+     */
     public void readFromFile() throws Exception {
         ObjectInputStream ois = null;
         File f = null;
@@ -137,7 +192,10 @@ public class CollectionOfBooks {
             }
         }
     }
-
+    /**
+     * adds all the books and information in the library to a string
+     * @return returns a string of all books in the library
+     */
     @Override
     public String toString() {
         StringBuilder books = new StringBuilder();
@@ -157,7 +215,10 @@ public class CollectionOfBooks {
         }
         return books.toString();
     }
-
+    /**
+     * adds all the books and information in the library to a string arraylist
+     * @return returns the string arraylist with all information
+     */
     public ArrayList libraryToString() {
         StringBuilder strBuilder;
         ArrayList<String> tmp = new ArrayList();
