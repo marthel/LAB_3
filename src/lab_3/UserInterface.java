@@ -27,7 +27,6 @@ public class UserInterface {
         String input;
         boolean quit = false;
         while (!quit) {
-            //System.out.println("Add book(1), remove book(2), search for books(3), sort Books(4), print all books(5), save and quit(6)");
             printMenu();
             input = scan.nextLine();
             switch (input) {
@@ -57,52 +56,6 @@ public class UserInterface {
                     break;
             }
         }
-    }
-
-    public void testAddBook() {
-        String title, isbn;
-        ArrayList<String> author = new ArrayList<>();
-        int edition, price;
-        title = "rakkay";
-        author.add("kalle");
-        isbn = "12-34-567890";
-        edition = 1;
-        price = 100;
-        library.addBook(title, author, edition, isbn, price);
-        author.clear();
-        title = "Rummanof";
-        author.add("Antono");
-        author.add("Alexi");
-        isbn = "12-34-567890";
-        edition = 3;
-        price = 250;
-        library.addBook(title, author, edition, isbn, price);
-        author.clear();
-        title = "Libre";
-        author.add("linn");
-        author.add("fredrik");
-        isbn = "12-34-567890";
-        edition = 2;
-        price = 200;
-        library.addBook(title, author, edition, isbn, price);
-        author.clear();
-        title = "mammy";
-        author.add("rinoy");
-        author.add("anton");
-        author.add("kalle");
-        isbn = "12-34-567890";
-        edition = 5;
-        price = 300;
-        library.addBook(title, author, edition, isbn, price);
-        author.clear();
-        title = "är namn";
-        author.add("örjan");
-        author.add("lukas");
-        isbn = "12-34-567890";
-        edition = 4;
-        price = 400;
-        library.addBook(title, author, edition, isbn, price);
-        author.clear();
     }
 
     public void addBook() {
@@ -196,10 +149,6 @@ public class UserInterface {
 
     public void printAllBooks() {
         System.out.println(library.toString());
-        /*ArrayList<String> tmp = library.libraryToString();
-         for (int i = 0; i < tmp.size(); i++) {
-         System.out.println(tmp.get(i));
-         }*/
     }
 
     public void sortBooks() {
