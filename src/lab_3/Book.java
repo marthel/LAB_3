@@ -10,8 +10,9 @@ import java.lang.*;
 import java.util.*;
 
 /**
- * Handles everything that has to do with a single book. It can return every property of
- * the book and it can return all properties in a single string if needed.
+ * Handles everything that has to do with a single book. It can return every
+ * property of the book and it can return all properties in a single string if
+ * needed.
  *
  * @author Marthin
  * @author rasmusjansson
@@ -34,7 +35,8 @@ public class Book implements Comparable<Book>, Serializable {
     private double price;
 
     /**
-     * An ArrayList<Author> which will contain the author or authors of the book.
+     * An ArrayList<Author> which will contain the author or authors of the
+     * book.
      */
     private ArrayList<Author> authors;
 
@@ -128,9 +130,8 @@ public class Book implements Comparable<Book>, Serializable {
     }
 
     /**
-     * Compares the price of this book and another one.
-     * If this book == b, then both book cost the same
-     * If this book <0 b, then b cost more
+     * Compares the price of this book and another one. If this book == b, then
+     * both book cost the same If this book <0 b, then b cost more
      * If this book >0 b, the this book cost more
      *
      * @param b b is the book the compared to
@@ -148,12 +149,19 @@ public class Book implements Comparable<Book>, Serializable {
      */
     @Override
     public String toString() {
-        String book = new String();
-        book += "Title: " + title + " Authors: ";
+        StringBuilder book = new StringBuilder();
+        book.append("Title: " + title + " Authors: ");
         for (int i = 0; i < authors.size(); i++) {
-            book += authors.get(i).getName() + ", ";
+            book.append(authors.get(i).getName() + ", ");
+            if (getNoOfAuthors() > 1 && i < getNoOfAuthors() - 1) {
+                book.append(" & ");
+            } else {
+                book.append(" , ");
+            }
         }
-        book += "ISBN: " + ISBN + ", EDITION: " + edition + ", PRICE: $" + price + " \n";
-        return book;
+        book.append("ISBN: " + ISBN + ", ");
+        book.append("EDITION: " + edition + ", ");
+        book.append("PRICE: $" + price + " \n");
+        return book.toString();
     }
 }

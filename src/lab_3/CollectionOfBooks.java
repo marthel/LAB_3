@@ -11,9 +11,9 @@ import java.lang.*;
 
 /**
  * Represents a library of books
- * 
+ *
  * @author Marthin
- * @author Rasmus
+ * @author rasmusjansson
  */
 public class CollectionOfBooks {
 
@@ -23,8 +23,7 @@ public class CollectionOfBooks {
     private ArrayList<Book> library;
 
     /**
-     * Constructs a library.
-     * The library is then filled with books from a file
+     * Constructs a library. The library is then filled with books from a file
      */
     public CollectionOfBooks() throws Exception {
         library = new ArrayList<>();
@@ -76,11 +75,11 @@ public class CollectionOfBooks {
     }
 
     /**
-     * Gets a list of books by the given title, will sort by title before it is returned.
-     * The title does not need to be the whole title of the book,
-     * the method will check if any title contains the given sequence.
+     * Gets a list of books by the given title, will sort by title before it is
+     * returned. The title does not need to be the whole title of the book, the
+     * method will check if any title contains the given sequence.
      *
-     * @param title title is element that search we are searching for
+     * @param title this is the element that will be search for
      * @return returns a list of books that contains the given title
      */
     public ArrayList<Book> getBooksByTitle(String title) {
@@ -98,9 +97,12 @@ public class CollectionOfBooks {
     }
 
     /**
-     * Gets a list of books by the given ISBN, will sort by ISBN before it is returned
-     * The ISBN needs to match the ISBN of a book for it to be returned.
-     * @param ISBN ISBN is that of which we are looking for
+     * Gets a list of books by the given ISBN, will sort by ISBN before it is
+     * returned The ISBN needs to match the ISBN of a book for it to be
+     * returned.
+     *
+     * @param ISBN This is the ISBN that will be comprared to the books in the
+     * library
      * @return returns a list of books that contains the given ISBN.
      */
     public ArrayList<Book> getBooksByISBN(String ISBN) {
@@ -117,11 +119,11 @@ public class CollectionOfBooks {
     }
 
     /**
-     * Gets a list of books by the given author, will sort by number of authors before it is returned
-     * The author doesn't need to be the whole name of an authors,
-     * the method will check if any author contains the given sequence.
+     * Gets a list of books by the given author, will sort by number of authors
+     * before it is returned, The author doesn't need to be the whole name of an
+     * author, the method will check if any author contains the given sequence.
      *
-     * @param author author is the one we are searching for
+     * @param author author is the character sequence that will be searched for
      * @return returns a list of books that contains the given author.
      */
     public ArrayList<Book> getBooksByAuthor(String author) {
@@ -162,8 +164,9 @@ public class CollectionOfBooks {
 
     /**
      * Methed not done.
+     *
      * @return returns null
-    */
+     */
     public ArrayList sortByPrice() {
         return null;
     }
@@ -185,8 +188,8 @@ public class CollectionOfBooks {
     }
 
     /**
-     * Tries to read from "library.ser" file, if successfull will add the books to the library.
-     * @throws e throws ClassNotFoundException and InvalidClassException
+     * Tries to read from "library.ser" file, if successfull will add the books
+     * to the library.
      */
     public void readFromFile() throws Exception {
         ObjectInputStream ois = null;
@@ -214,31 +217,23 @@ public class CollectionOfBooks {
     }
 
     /**
-     * Adds all the books and information in the library to a string
+     * Adds all the books and information in the library to a StringBuilder
+     * books
+     *
      * @return returns a string of all books in the library
      */
     @Override
     public String toString() {
         StringBuilder books = new StringBuilder();
         for (Book book : library) {
-            books.append("Title: " + book.getTitle() + " Author(s): ");
-            for (int i = 0; i < book.getNoOfAuthors(); i++) {
-                books.append(book.getAuthors().get(i).getName());
-                if (book.getNoOfAuthors() > 1 && i < book.getNoOfAuthors() - 1) {
-                    books.append(" & ");
-                } else {
-                    books.append(" , ");
-                }
-            }
-            books.append("ISBN: " + book.getISBN() + ", ");
-            books.append("EDITION: " + book.getEdition() + ", ");
-            books.append("PRICE: $" + book.getPrice() + " \n");
+            books.append(book.toString());
         }
         return books.toString();
     }
 
     /**
      * Adds all the books and information in the library to a ArrayList<String>
+     *
      * @return returns the string ArrayList with all information
      */
     public ArrayList libraryToString() {
